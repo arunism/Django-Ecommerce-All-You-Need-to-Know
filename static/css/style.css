@@ -935,7 +935,7 @@ h2 {
 
 .product-view .pagination .page-item:hover .page-link,
 .product-view .pagination .page-item.active .page-link {
-    color: #99738e;
+    color: #fff;
     background: #2c062e;
 }
 
