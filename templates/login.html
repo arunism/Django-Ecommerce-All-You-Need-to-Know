@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- Login Start -->
+        <div class="login">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-4">
+                        <div class="login-form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>E-mail / Username</label>
+                                    <input class="form-control" type="text" placeholder="E-mail / Username">
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Password</label>
+                                    <input class="form-control" type="password" placeholder="Password">
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="newaccount">
+                                        <label class="custom-control-label" for="newaccount">Keep me signed in</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Login End -->
+
+{% endblock %}
