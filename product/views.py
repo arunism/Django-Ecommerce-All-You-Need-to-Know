@@ -25,9 +25,11 @@ class ProductListView(View):
                 }
         return render(request, 'product-list.html', context)
 
-def product_details(request):
-    context = {'title':'Details', 'subtitle':'Products'}
-    return render(request, 'product-detail.html', context)
+class ProductDetailView(View):
+    def get(self, request, slug):
+        product = Product.objects.get(slug=slug)
+        context = {'title':'Details', 'subtitle':'Products', 'product':product}
+        return render(request, 'product-detail.html', context)
 
 def cart(request):
     context = {'title':'Cart', 'subtitle':'Products'}

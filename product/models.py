@@ -18,11 +18,11 @@ class Product(models.Model):
     selling_price = models.DecimalField(max_digits=10, decimal_places=2)
     discounted_price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
-    image1 = models.ImageField(upload_to='products', null=True, blank=True)
-    image2 = models.ImageField(upload_to='products', null=True, blank=True)
-    image3 = models.ImageField(upload_to='products', null=True, blank=True)
-    image4 = models.ImageField(upload_to='products', null=True, blank=True)
-    image5 = models.ImageField(upload_to='products', null=True, blank=True)
+    image1 = models.ImageField(upload_to='products', default='default.jpg', null=True, blank=True)
+    image2 = models.ImageField(upload_to='products', default='default.jpg', null=True, blank=True)
+    image3 = models.ImageField(upload_to='products', default='default.jpg', null=True, blank=True)
+    image4 = models.ImageField(upload_to='products', default='default.jpg', null=True, blank=True)
+    image5 = models.ImageField(upload_to='products', default='default.jpg', null=True, blank=True)
     slug = models.SlugField(max_length=75, unique=True)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -34,6 +34,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def specification_list(self):
+        return self.specification.split('**')
 
     # Creating a unique slug for each product
     def _create_unique_slug(self):

@@ -57,7 +57,7 @@
                             <div class="col-md-4">
                                 <div class="product-item">
                                     <div class="product-title">
-                                        <a href="{% url 'product:product_details' %}">{{ product.title }}</a>
+                                        <a href="{% url 'product:product_details' product.slug %}">{{ product.title }}</a>
                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -67,13 +67,13 @@
                                         </div>
                                     </div>
                                     <div class="product-image">
-                                        <a href="{% url 'product:product_details' %}">
+                                        <a href="{% url 'product:product_details' product.slug %}">
                                             <img src="{{ product.image1.url }}" alt="">
                                         </a>
                                         <div class="product-action">
                                             <a href="#"><i class="fa fa-cart-plus"></i></a>
                                             <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="{% url 'product:product_details' %}"><i class="fa fa-search"></i></a>
+                                            <a href="{% url 'product:product_details' product.slug %}"><i class="fa fa-search"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-price">
