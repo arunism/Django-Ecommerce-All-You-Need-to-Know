@@ -43,6 +43,7 @@
                             <a href="{% url 'product:contact' %}" class="nav-item nav-link">Contact Us</a>
                         </div>
                         <div class="navbar-nav ml-auto">
+                            {% if user.is_authenticated %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
                                 <div class="dropdown-menu">
@@ -50,6 +51,7 @@
                                     <a href="{% url 'user:login' %}" class="dropdown-item">Logout</a>
                                 </div>
                             </div>
+                            {% else %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                                 <div class="dropdown-menu">
@@ -57,6 +59,7 @@
                                     <a href="{% url 'user:register' %}" class="dropdown-item">Register</a>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </nav>

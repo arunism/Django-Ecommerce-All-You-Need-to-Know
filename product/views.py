@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.views import View
+from product.models import Product, Cart, Order
 
 # Create your views here.
 
@@ -6,9 +8,22 @@ def home(request):
     context = {'title': 'Home', 'subtitle':'Products'}
     return render(request, 'index.html', context)
 
-def product_list(request):
-    context = {'title':'Products'}
-    return render(request, 'product-list.html', context)
+class ProductListView(View):
+    def get(self, request):
+        product = Product.objects.all().order_by('-created_at')
+        Cosmetics_and_beauty = Product.objects.filter(category='Cosmetics_and_beauty')
+        kids_clothes = Product.objects.filter(category='kids_clothes')
+        men_and_women_clothes = Product.objects.filter(category='men_and_women_clothes')
+        gadgets_accessories = Product.objects.filter(category='gadgets_accessories')
+        electronics = Product.objects.filter(category='electronics')
+        context = {'title':'Products',
+                    'products': product,
+                    'kids_clothes':kids_clothes,
+                    'men_and_women_clothes': men_and_women_clothes,
+                    'gadgets_accessories': gadgets_accessories,
+                    'electronics': electronics,
+                }
+        return render(request, 'product-list.html', context)
 
 def product_details(request):
     context = {'title':'Details', 'subtitle':'Products'}

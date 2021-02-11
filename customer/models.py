@@ -21,6 +21,8 @@ class Profile(models.Model):
     state = models.CharField(max_length=25)
     district = models.CharField(max_length=25)
     street = models.CharField(max_length=25)
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return self.user.username

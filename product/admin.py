@@ -1,5 +1,5 @@
 from django.contrib import admin
-from product.models import Product
+from product.models import Product, Cart, Order
 
 # Register your models here.
 
@@ -13,4 +13,22 @@ class ProductAdmin(admin.ModelAdmin):
     class Meta:
         model = Product
 
+class CartAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_at'
+    list_display = ['id', 'user', 'created_at']
+    list_filter = ['created_at', 'updated_at']
+    readonly_fields = ['user', 'created_at', 'updated_at', 'product', 'quantity', 'size', 'color']
+    class Meta:
+        model = Cart
+
+class OrderAdmin(admin.ModelAdmin):
+    date_hierarchy = 'created_at'
+    list_display = ['id', 'user', 'created_at']
+    list_filter = ['created_at', 'updated_at']
+    readonly_fields = ['user', 'profile', 'created_at', 'updated_at', 'product', 'quantity', 'size', 'color']
+    class Meta:
+        model = Order
+
+admin.site.register(Cart, CartAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Order, OrderAdmin)
