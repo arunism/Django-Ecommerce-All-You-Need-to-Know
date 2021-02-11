@@ -10,47 +10,36 @@
                     <div class="col-lg-1"></div>
                     <div class="col-lg-6">
                         <div class="register-form">
-                            <div class="row">
+                            <form method="post" class="row">
+                                {% csrf_token %}
                                 <div class="col-md-6">
                                     <label>First Name</label>
-                                    <input class="form-control" type="text" placeholder="First Name">
+                                    <input class="form-control" name="first_name" type="text" placeholder="First Name">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Last Name</label>
-                                    <input class="form-control" type="text" placeholder="Last Name">
+                                    <input class="form-control" name="last_name" type="text" placeholder="Last Name">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Username</label>
-                                    <input class="form-control" type="text" placeholder="Username">
+                                    <input class="form-control" name="username" type="text" placeholder="Username">
                                 </div>
                                 <div class="col-md-6">
                                     <label>E-mail</label>
-                                    <input class="form-control" type="email" placeholder="E-mail">
-                                </div>
-                                <div class="col-md-6">
-                                  <label>Mobile No</label>
-                                  <input class="form-control" type="text" placeholder="Mobile No">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Gender</label>
-                                    <select class="custom-select">
-                                        <option selected>Male</option>
-                                        <option>Female</option>
-                                        <option>Not Specified</option>
-                                    </select>
+                                    <input class="form-control" name="email" type="email" placeholder="E-mail">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Password</label>
-                                    <input class="form-control" type="password" placeholder="Password">
+                                    <input class="form-control" name="password" type="password" placeholder="Password">
                                 </div>
                                 <div class="col-md-6">
                                     <label>Confirm Password</label>
-                                    <input class="form-control" type="password" placeholder="Password">
+                                    <input class="form-control" name="confirm_password" type="password" placeholder="Password">
                                 </div>
                                 <div class="col-md-12">
                                     <button class="btn">Submit</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-5"></div>
