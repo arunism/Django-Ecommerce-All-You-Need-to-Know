@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -48,13 +49,20 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You have been logged in to your account!')
-            return redirect('product:home')
+            return redirect('product:product_list')
         else:
             messages.error(request, 'Oops! Username and Password do not match!')
             return redirect('user:login')
     else:
         context = {'title':'Login', 'subtitle':'User'}
         return render(request, 'login.html', context)
+
+
+@login_required
+def logout(request):
+    auth.logout(request)
+    messages.success(request, 'You have been logged out of your account!')
+    return redirect('user:login')
 
 
 def profile(request):
