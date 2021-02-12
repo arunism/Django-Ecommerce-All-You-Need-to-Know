@@ -40,8 +40,21 @@ def register(request):
 
 
 def login(request):
-    context = {'title':'Login', 'subtitle':'User'}
-    return render(request, 'login.html', context)
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, 'You have been logged in to your account!')
+            return redirect('product:home')
+        else:
+            messages.error(request, 'Oops! Username and Password do not match!')
+            return redirect('user:login')
+    else:
+        context = {'title':'Login', 'subtitle':'User'}
+        return render(request, 'login.html', context)
 
 
 def profile(request):

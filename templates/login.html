@@ -10,14 +10,15 @@
                     <div class="col-lg-1"></div>
                     <div class="col-lg-4">
                         <div class="login-form">
-                            <div class="row">
+                            <form class="row" method="post">
+                                {% csrf_token %}
                                 <div class="col-md-12">
                                     <label>E-mail / Username</label>
-                                    <input class="form-control" type="text" placeholder="E-mail / Username">
+                                    <input class="form-control" name="username" type="text" placeholder="E-mail / Username">
                                 </div>
                                 <div class="col-md-12">
                                     <label>Password</label>
-                                    <input class="form-control" type="password" placeholder="Password">
+                                    <input class="form-control" name="password" type="password" placeholder="Password">
                                 </div>
                                 <div class="col-md-12">
                                     <div class="custom-control custom-checkbox">
@@ -28,7 +29,7 @@
                                 <div class="col-md-12">
                                     <button class="btn">Submit</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-lg-7"></div>
