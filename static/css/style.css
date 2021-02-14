@@ -1762,6 +1762,16 @@ h2 {
     background: #fff;
     margin-bottom: 30px;
 }
+.forgot-password {
+  margin-bottom: 20px;
+}
+.login-register-link {
+  text-align: center;
+  color: blue;
+  margin-top: 25px;
+  font-size: 14px;
+  font-weight: bold;
+}
 
 /********** Footer CSS ************/
 .footer {

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-from customer.forms import MyPasswordChangeForm
+from customer.forms import MyPasswordChangeForm, MyPasswordResetForm
 
 # Create your views here.
 
@@ -67,6 +67,7 @@ def logout(request):
     return redirect('user:login')
 
 
+@login_required
 def profile(request):
     # Change User Password
     if request.method == 'POST':

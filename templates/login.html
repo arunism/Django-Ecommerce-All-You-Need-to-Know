@@ -20,16 +20,14 @@
                                     <label>Password</label>
                                     <input class="form-control" name="password" type="password" placeholder="Password">
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="newaccount">
-                                        <label class="custom-control-label" for="newaccount">Keep me signed in</label>
-                                    </div>
+                                <div class="col-md-12 forgot-password">
+                                    <a href="{% url 'user:reset_password' %}">Forgot Password?</a>
                                 </div>
                                 <div class="col-md-12">
-                                    <button class="btn">Submit</button>
+                                    <button class="btn">Login</button>
                                 </div>
                             </form>
+                            <div class="login-register-link">New to Ghimire Stores? <a href="{% url 'user:register' %}">Create an Account</a></div>
                         </div>
                     </div>
                     <div class="col-lg-7"></div>
