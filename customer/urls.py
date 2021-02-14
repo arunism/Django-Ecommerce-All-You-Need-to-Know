@@ -12,5 +12,9 @@ urlpatterns = [
           auth_views.PasswordResetView.as_view(template_name='reset-password.html', form_class=MyPasswordResetForm),
           name='reset_password'
           ),
+    path('reset/password/done/',
+          auth_views.PasswordResetDoneView.as_view(template_name='reset-password-done.html'),
+          name='reset_password_done'
+          ),
     path('me/', views.profile, name='profile'),
 ]
