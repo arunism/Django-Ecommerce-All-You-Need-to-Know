@@ -26,3 +26,19 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+SERVICE_CHOICES = (
+    ('Excellent', 'Excellent'),
+    ('Good', 'Good'),
+    ('Satisfactory','Satisfactory'),
+    ('Bad','Bad')
+)
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    picture = models.ImageField(default='default.jpg', upload_to='reviews')
+    service = models.CharField(max_length=20, choices=SERVICE_CHOICES)
+    text = models.TextField(max_length=500)
+
+    def __str__(self):
+        return self.user.username

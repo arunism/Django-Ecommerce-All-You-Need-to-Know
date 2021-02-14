@@ -1,5 +1,5 @@
 from django.contrib import admin
-from customer.models import Profile
+from customer.models import Profile, Review
 
 # Register your models here.
 
@@ -10,3 +10,5 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ['user', 'phone', 'gender', 'created_at']
     list_filter = ['created_at', 'district', 'state', 'street']
     readonly_fields = ['user', 'created_at', 'updated_at', 'phone', 'gender', 'country', 'state', 'district', 'street']
+
+admin.site.register(Review)

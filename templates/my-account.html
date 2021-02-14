@@ -14,14 +14,19 @@
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
                             <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Account Details</a>
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#password-tab" role="tab"><i class="fa fa-lock"></i>Change Password</a>
                         </div>
                     </div>
                     <div class="col-md-9">
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
-                                <h4>Dashboard</h4>
+                                <h4>Welcome {{request.user.first_name}} {{request.user.last_name}}</h4>
+                                <hr>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum.
+                                    In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus.
+                                    Nulla tristique viverra nisl, sit amet bibendum ante suscipit non.
+                                    Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
                                 </p>
                             </div>
                             <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
@@ -68,30 +73,40 @@
                             </div>
                             <div class="tab-pane fade" id="payment-tab" role="tabpanel" aria-labelledby="payment-nav">
                                 <h4>Payment Method</h4>
+                                <hr>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum. In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus. Nulla tristique viverra nisl, sit amet bibendum ante suscipit non. Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum.
+                                    In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus.
+                                    Nulla tristique viverra nisl, sit amet bibendum ante suscipit non.
+                                    Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
                                 </p>
                             </div>
                             <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
                                 <h4>Address</h4>
+                                <hr>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 profile-address">
                                         <h5>Payment Address</h5>
-                                        <p>123 Payment Street, Los Angeles, CA</p>
-                                        <p>Mobile: 012-345-6789</p>
-                                        <button class="btn">Edit Address</button>
+                                        <br>
+                                        <p>Madhyam Path, Lamachaur</p>
+                                        <p>Pokhara</p>
+                                        <p>Mobile: 977-345-6789</p>
+                                        <a href="" class="btn">Edit Address</a>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 profile-address">
                                         <h5>Shipping Address</h5>
-                                        <p>123 Shipping Street, Los Angeles, CA</p>
-                                        <p>Mobile: 012-345-6789</p>
+                                        <br>
+                                        <p>Madhyam Path, Lamachaur</p>
+                                        <p>Pokhara</p>
+                                        <p>Mobile: 977-345-6789</p>
                                         <button class="btn">Edit Address</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
                                 <h4>Account Details</h4>
-                                <div class="row">
+                                <hr>
+                                <form class="row">
                                     <div class="col-md-6">
                                         <input class="form-control" type="text" placeholder="First Name">
                                     </div>
@@ -132,22 +147,23 @@
                                         <button class="btn">Update Account</button>
                                         <br><br>
                                     </div>
-                                </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="password-tab" role="tabpanel" aria-labelledby="account-nav">
                                 <h4>Password change</h4>
-                                <div class="row">
+                                <hr>
+                                <form class="row col-md-6" method="post" novalidate>
+                                    {% csrf_token %}
+                                    {% for field in change_password_form %}
                                     <div class="col-md-12">
-                                        <input class="form-control" type="password" placeholder="Current Password">
+                                        {{field}}
                                     </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="New Password">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Confirm Password">
-                                    </div>
+                                      {{field.errors|striptags}}
+                                    {% endfor %}
                                     <div class="col-md-12">
                                         <button class="btn">Save Changes</button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

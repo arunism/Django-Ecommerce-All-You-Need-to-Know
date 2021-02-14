@@ -1,11 +1,20 @@
 from django.shortcuts import render
 from django.views import View
 from product.models import Product, Cart, Order
+from customer.models import Review
 
 # Create your views here.
 
 def home(request):
-    context = {'title': 'Home', 'subtitle':'Products'}
+    new_releases = Product.objects.all().order_by('-created_at')[:10]
+    featured_products = Product.objects.filter(rating=4.5).order_by('-created_at')[:10]
+    reviews = Review.objects.filter(service='Excellent')[:10]
+    context = {'title': 'Home',
+                'subtitle':'Products',
+                'new_releases':new_releases,
+                'featured_products':featured_products,
+                'reviews':reviews
+                }
     return render(request, 'index.html', context)
 
 class ProductListView(View):

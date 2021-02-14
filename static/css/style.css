@@ -789,6 +789,7 @@ h2 {
 .product-view .product-price-range .dropdown-menu {
     margin: -1px 0 0 0;
     border-radius: 0;
+    width: 100%;
 }
 .product-view .product-item {
     margin-bottom: 30px;
@@ -1489,6 +1490,14 @@ h2 {
     padding: 30px;
     background: #fff;
 }
+.my-account .tab-content h4 {
+  text-align: center;
+  color: #8b4000;
+  font-weight: bold;
+}
+.my-account .tab-content hr {
+  margin: 15px 15px 25px;
+}
 .my-account .tab-content .table {
     width: 100%;
     text-align: center;
@@ -1504,6 +1513,16 @@ h2 {
 }
 .my-account .tab-content .table td {
     vertical-align: middle;
+}
+.my-account .profile-address {
+  background-color: #f3f6ff;
+  padding: 20px;
+  border: 12px solid #fff;
+  border-radius: 20px;
+}
+.my-account .profile-address h5 {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 /********* Newsletter CSS *********/
 .newsletter {

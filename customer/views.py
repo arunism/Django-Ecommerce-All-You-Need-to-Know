@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from customer.forms import MyPasswordChangeForm
 
 # Create your views here.
 
@@ -66,5 +68,22 @@ def logout(request):
 
 
 def profile(request):
-    context = {'title':'Profile', 'subtitle':'User'}
+    # Change User Password
+    if request.method == 'POST':
+        form = MyPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            # This will update the session and we won't be logged out after changing the password
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Your password has been updated!')
+            return redirect('user:profile')
+        else:
+            messages.success(request, 'Oops! Something went wrong. Please try again.')
+            return redirect('user:profile')
+    else:
+        form = MyPasswordChangeForm(user=request.user)
+    context = {'title':'Profile',
+               'subtitle':'User',
+               'change_password_form':form,
+               }
     return render(request, 'my-account.html', context)
