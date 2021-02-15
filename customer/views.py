@@ -71,20 +71,20 @@ def logout(request):
 def profile(request):
     # Change User Password
     if request.method == 'POST':
-        form = MyPasswordChangeForm(user=request.user, data=request.POST)
-        if form.is_valid():
-            form.save()
+        change_password_form = MyPasswordChangeForm(user=request.user, data=request.POST)
+        if change_password_form.is_valid():
+            change_password_form.save()
             # This will update the session and we won't be logged out after changing the password
-            update_session_auth_hash(request, form.user)
+            update_session_auth_hash(request, change_password_form.user)
             messages.success(request, 'Your password has been updated!')
             return redirect('user:profile')
         else:
             messages.success(request, 'Oops! Something went wrong. Please try again.')
             return redirect('user:profile')
     else:
-        form = MyPasswordChangeForm(user=request.user)
+        change_password_form = MyPasswordChangeForm(user=request.user)
     context = {'title':'Profile',
                'subtitle':'User',
-               'change_password_form':form,
+               'change_password_form':change_password_form,
                }
     return render(request, 'my-account.html', context)

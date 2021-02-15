@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from customer import views
-from customer.forms import MyPasswordResetForm
+from customer.forms import MyPasswordResetForm, MySetPasswordForm
 
 app_name = 'user'
 urlpatterns = [
@@ -13,8 +13,16 @@ urlpatterns = [
           name='reset_password'
           ),
     path('reset/password/done/',
-          auth_views.PasswordResetDoneView.as_view(template_name='reset-password-done.html'),
-          name='reset_password_done'
+          auth_views.PasswordResetDoneView.as_view(template_name='password-reset-done.html'),
+          name='password_reset_done'
+          ),
+    path('reset/password/confirm/<uid64>/<token>',
+          auth_views.PasswordResetConfirmView.as_view(template_name='password-reset-confirm.html', form_class=MySetPasswordForm),
+          name='password_reset_confirm'
+          ),
+    path('reset/password/complete/',
+          auth_views.PasswordResetCompleteView.as_view(template_name='password-reset-complete.html'),
+          name='password_reset_complete'
           ),
     path('me/', views.profile, name='profile'),
 ]
