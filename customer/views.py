@@ -69,7 +69,14 @@ def logout(request):
 
 @login_required
 def profile(request):
-    # Change User Password
+    context = {'title':'Profile',
+               'subtitle':'User',
+               }
+    return render(request, 'my-account.html', context)
+
+
+@login_required
+def change_password(request):
     if request.method == 'POST':
         change_password_form = MyPasswordChangeForm(user=request.user, data=request.POST)
         if change_password_form.is_valid():
@@ -83,8 +90,8 @@ def profile(request):
             return redirect('user:profile')
     else:
         change_password_form = MyPasswordChangeForm(user=request.user)
-    context = {'title':'Profile',
+    context = {'title':'Change Password',
                'subtitle':'User',
                'change_password_form':change_password_form,
                }
-    return render(request, 'my-account.html', context)
+    return render(request, 'change-password.html', context)

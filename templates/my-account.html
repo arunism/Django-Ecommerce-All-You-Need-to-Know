@@ -14,7 +14,7 @@
                             <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
                             <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>
                             <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Account Details</a>
-                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#password-tab" role="tab"><i class="fa fa-lock"></i>Change Password</a>
+                            <a class="nav-link" id="account-nav" href="{% url 'user:change_password' %}" role="tab"><i class="fa fa-lock"></i>Change Password</a>
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -106,7 +106,8 @@
                             <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
                                 <h4>Account Details</h4>
                                 <hr>
-                                <form class="row">
+                                <form class="row" method="post">
+                                    {% csrf_token %}
                                     <div class="col-md-6">
                                         <input class="form-control" type="text" placeholder="First Name">
                                     </div>
@@ -116,52 +117,16 @@
                                     <div class="col-md-6">
                                         <input class="form-control" type="text" placeholder="Username">
                                     </div>
+
+                                    {% for field in profile_form %}
                                     <div class="col-md-6">
-                                      <select class="custom-select">
-                                          <option selected>Male</option>
-                                          <option>Female</option>
-                                          <option>Not Specified</option>
-                                      </select>
+                                        {{ field }}
                                     </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Mobile">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Email">
-                                    </div>
-                                    <div class="col-md-6">
-                                      <select class="custom-select">
-                                          <option selected>Nepal</option>
-                                      </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="State">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="District">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Street">
-                                    </div>
+                                    {% endfor %}
+
                                     <div class="col-md-12">
                                         <button class="btn">Update Account</button>
                                         <br><br>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="password-tab" role="tabpanel" aria-labelledby="account-nav">
-                                <h4>Password change</h4>
-                                <hr>
-                                <form class="row col-md-6" method="post" novalidate>
-                                    {% csrf_token %}
-                                    {% for field in change_password_form %}
-                                    <div class="col-md-12">
-                                        {{field}}
-                                    </div>
-                                    {{field.errors|striptags}}
-                                    {% endfor %}
-                                    <div class="col-md-12">
-                                        <button class="btn">Save Changes</button>
                                     </div>
                                 </form>
                             </div>

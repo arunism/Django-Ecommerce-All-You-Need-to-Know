@@ -71,7 +71,7 @@ GENDER_CHOICES = (
     ('Female', 'Female'),
     ('Not Specified', 'Not Specified'),
 )
-class ProfileForms(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     phone = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Phone'}))
     gender = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=GENDER_CHOICES)
     country = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=(('Nepal','Nepal')))
