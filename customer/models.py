@@ -11,10 +11,6 @@ GENDER_CHOICES = (
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # first_name = models.CharField(max_length=20)
-    # last_name = models.CharField(max_length=20)
-    # username = models.CharField(max_length=20)
-    # email = models.EmailField()
     phone = models.CharField(max_length=15)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES)
     country = models.CharField(max_length=25)

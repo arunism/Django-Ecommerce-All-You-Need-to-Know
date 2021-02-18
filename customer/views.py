@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-from customer.forms import MyPasswordChangeForm, MyPasswordResetForm
+from customer.forms import MyPasswordChangeForm, MyPasswordResetForm, ProfileForm
 
 # Create your views here.
 
@@ -69,14 +69,6 @@ def logout(request):
 
 @login_required
 def profile(request):
-    context = {'title':'Profile',
-               'subtitle':'User',
-               }
-    return render(request, 'my-account.html', context)
-
-
-@login_required
-def change_password(request):
     if request.method == 'POST':
         change_password_form = MyPasswordChangeForm(user=request.user, data=request.POST)
         if change_password_form.is_valid():
@@ -94,4 +86,26 @@ def change_password(request):
                'subtitle':'User',
                'change_password_form':change_password_form,
                }
-    return render(request, 'change-password.html', context)
+    return render(request, 'my-account.html', context)
+
+
+# @login_required
+# def change_password(request):
+#     if request.method == 'POST':
+#         change_password_form = MyPasswordChangeForm(user=request.user, data=request.POST)
+#         if change_password_form.is_valid():
+#             change_password_form.save()
+#             # This will update the session and we won't be logged out after changing the password
+#             update_session_auth_hash(request, change_password_form.user)
+#             messages.success(request, 'Your password has been updated!')
+#             return redirect('user:profile')
+#         else:
+#             messages.success(request, 'Oops! Something went wrong. Please try again.')
+#             return redirect('user:profile')
+#     else:
+#         change_password_form = MyPasswordChangeForm(user=request.user)
+#     context = {'title':'Change Password',
+#                'subtitle':'User',
+#                'change_password_form':change_password_form,
+#                }
+#     return render(request, 'change-password.html', context)

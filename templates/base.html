@@ -42,7 +42,7 @@
                             <a href="{% url 'product:contact' %}" class="nav-item nav-link">Contact Us</a>
                         </div>
                         <div class="navbar-nav ml-auto">
-                            {% if user.is_authenticated %}
+                            {% if request.user.is_authenticated %}
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
                                 <div class="dropdown-menu">

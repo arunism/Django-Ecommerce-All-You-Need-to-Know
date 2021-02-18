@@ -74,7 +74,7 @@ GENDER_CHOICES = (
 class ProfileForm(forms.ModelForm):
     phone = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Phone'}))
     gender = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=GENDER_CHOICES)
-    country = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=(('Nepal','Nepal')))
+    country = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=(('Nepal','Nepal'),))
     state = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'State'}))
     district = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'District'}))
     street = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Street'}))
