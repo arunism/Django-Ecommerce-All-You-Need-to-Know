@@ -11,17 +11,19 @@ GENDER_CHOICES = (
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    phone = models.CharField(max_length=15)
     gender = models.CharField(max_length=20, choices=GENDER_CHOICES)
+    phone = models.CharField(max_length=15)
     country = models.CharField(max_length=25)
     state = models.CharField(max_length=25)
     district = models.CharField(max_length=25)
+    city = models.CharField(max_length=25)
     street = models.CharField(max_length=25)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated_at = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
         return self.user.username
+
 
 SERVICE_CHOICES = (
     ('Excellent', 'Excellent'),

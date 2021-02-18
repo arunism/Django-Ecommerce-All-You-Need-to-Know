@@ -44,7 +44,7 @@
                         <div class="navbar-nav ml-auto">
                             {% if request.user.is_authenticated %}
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{request.user.first_name|capfirst}}</a>
                                 <div class="dropdown-menu">
                                     <a href="{% url 'user:profile' %}" class="dropdown-item">Profile</a>
                                     <a href="{% url 'user:logout' %}" class="dropdown-item">Logout</a>

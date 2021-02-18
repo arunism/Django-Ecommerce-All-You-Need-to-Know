@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from customer.forms import MyPasswordChangeForm, MyPasswordResetForm, ProfileForm
+from customer.models import Profile
 
 # Create your views here.
 
@@ -70,6 +71,7 @@ def logout(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
+        ### ---------- CHANGE PASSWORD ---------- ###
         change_password_form = MyPasswordChangeForm(user=request.user, data=request.POST)
         if change_password_form.is_valid():
             change_password_form.save()
@@ -77,14 +79,37 @@ def profile(request):
             update_session_auth_hash(request, change_password_form.user)
             messages.success(request, 'Your password has been updated!')
             return redirect('user:profile')
-        else:
-            messages.success(request, 'Oops! Something went wrong. Please try again.')
+        elif not change_password_form.is_valid():
+            messages.error(request, 'Oops! Something went wrong. Please try again.')
             return redirect('user:profile')
+
+        ### ---------- PROFILE INFO UPDATE ---------- ###
+        else:
+            profile_form = ProfileForm(data=request.POST)
+            if profile_form.is_valid():
+                user = request.user
+                form.cleaned_data['gender']
+                form.cleaned_data['phone']
+                form.cleaned_data['country']
+                form.cleaned_data['state']
+                form.cleaned_data['district']
+                form.cleaned_data['city']
+                form.cleaned_data['street']
+
+                profiles = Profile(user=user,phone=phone,gender=gender,country=country,state=state,district=district,city=city,street=street)
+                profiles.save()
+                messages.success(request, 'Congratulations! Your profile has been updated.')
+            else:
+                messages.error(request, "Oops! Your profile couldn't be updated. Please try again.")
+                return redirect('user:profile')
+
     else:
         change_password_form = MyPasswordChangeForm(user=request.user)
+        profile_form = ProfileForm()
     context = {'title':'Change Password',
                'subtitle':'User',
                'change_password_form':change_password_form,
+               'profile_form':profile_form,
                }
     return render(request, 'my-account.html', context)
 

@@ -86,22 +86,24 @@
                                 <h4>Address</h4>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-md-6 profile-address">
-                                        <h5>Payment Address</h5>
-                                        <br>
-                                        <p>Madhyam Path, Lamachaur</p>
-                                        <p>Pokhara</p>
-                                        <p>Mobile: 977-345-6789</p>
-                                        <a href="" class="btn">Edit Address</a>
-                                    </div>
-                                    <div class="col-md-6 profile-address">
-                                        <h5>Shipping Address</h5>
-                                        <br>
-                                        <p>Madhyam Path, Lamachaur</p>
-                                        <p>Pokhara</p>
-                                        <p>Mobile: 977-345-6789</p>
-                                        <button class="btn">Edit Address</button>
-                                    </div>
+                                  {% if not address %}
+                                  <div class="col-md-1"></div>
+                                  <div class="alert-message col-md-10">
+                                    <p>No address specified. Go to 'Account Details' section and update your information.</p>
+                                  </div>
+                                  <div class="col-md-1"></div>
+                                  {% else %}
+                                  {% for add in address %}
+                                  <div class="col-md-6 profile-address">
+                                      <h5>Address {{forloop.counter}}</h5>
+                                      <br>
+                                      <p>{{add.street}}, {{add.city}}</p>
+                                      <p>{{add.district}}</p>
+                                      <p>Mobile: 977-{{add.phone}}</p>
+                                      <a href="" class="btn">Edit Address</a>
+                                  </div>
+                                  {% endfor %}
+                                  {% endif %}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
@@ -109,15 +111,6 @@
                                 <hr>
                                 <form class="row" method="post">
                                     {% csrf_token %}
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="First Name">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Last Name">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" placeholder="Username">
-                                    </div>
 
                                     {% for field in profile_form %}
                                     <div class="col-md-6">

@@ -71,14 +71,26 @@ GENDER_CHOICES = (
     ('Female', 'Female'),
     ('Not Specified', 'Not Specified'),
 )
+STATE_CHOICES = (
+    ('Province No. 1', 'Province No. 1'),
+    ('Province No. 2', 'Province No. 2'),
+    ('Province No. 3', 'Province No. 3'),
+    ('Province No. 4', 'Province No. 4'),
+    ('Province No. 5', 'Province No. 5'),
+    ('Province No. 6', 'Province No. 6'),
+    ('Province No. 7', 'Province No. 7'),
+)
 class ProfileForm(forms.ModelForm):
-    phone = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Phone'}))
-    gender = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=GENDER_CHOICES)
-    country = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=(('Nepal','Nepal'),))
-    state = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'State'}))
-    district = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'District'}))
-    street = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Street'}))
+    gender = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=GENDER_CHOICES, required=True)
+    phone = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Phone *'}), required=True)
+    country = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=(('Nepal','Nepal'),), required=True)
+    state = forms.ChoiceField(widget=forms.Select(attrs={'class':'form-control'}), choices=STATE_CHOICES, required=True)
+    district = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'District *'}), required=True)
+    city = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'City *'}), required=True)
+    street = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Street *'}), required=True)
+    building_no = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Building No'}), required=False)
+    zip_code = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Zip Code'}), required=False)
 
     class Meta:
         model = Profile
-        fields = ['phone','gender','country','state','district','street']
+        fields = ['gender','phone','country','state','district','city','street','building_no','zip_code']
