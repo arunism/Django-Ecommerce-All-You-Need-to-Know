@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load my_tags %}
 
 {% block content %}
 
@@ -38,7 +39,7 @@
                                                   <button class="btn-plus"><i class="fa fa-plus"></i></button>
                                               </div>
                                           </td>
-                                          <td>${{ item.product.discounted_price }}</td>
+                                          <td>${{ item.product.discounted_price | multiply:item.quantity }}</td>
                                           <td><button><i class="fa fa-trash"></i></button></td>
                                         </tr>
                                       {% endfor %}
