@@ -9,8 +9,8 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                          <a class="nav-link" id="dashboard-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
-                          <a class="nav-link" id="orders-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
+                          <a class="nav-link" id="dashboard-nav" href="{% url 'user:profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                          <a class="nav-link" id="orders-nav" href="{% url 'user:order' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
                           <a class="nav-link active" id="payment-nav" href="{% url 'user:payment' %}"><i class="fa fa-credit-card"></i>Payment Method</a>
                           <a class="nav-link" id="address-nav" href="{% url 'user:address' %}"><i class="fa fa-map-marker-alt"></i>Address</a>
                           <a class="nav-link" id="account-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-user"></i>Update Details</a>
@@ -19,7 +19,9 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                      <div class="tab-pane" id="payment-tab" aria-labelledby="payment-nav">
+                      <div class="tab-content">
+
+                      <div class="tab-pane active" id="payment-tab" aria-labelledby="payment-nav">
                           <h4>Payment Method</h4>
                           <hr>
                           <p>
@@ -31,6 +33,7 @@
                       </div>
 
                     </div>
+                  </div>
                 </div>
             </div>
         </div>

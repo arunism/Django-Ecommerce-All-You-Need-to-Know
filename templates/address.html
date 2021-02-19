@@ -9,18 +9,19 @@
                 <div class="row">
                     <div class="col-md-3">
                       <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link" id="dashboard-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
-                        <a class="nav-link" id="orders-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
-                        <a class="nav-link active" id="payment-nav" href="{% url 'user:payment' %}"><i class="fa fa-credit-card"></i>Payment Method</a>
-                        <a class="nav-link" id="address-nav" href="{% url 'user:address' %}"><i class="fa fa-map-marker-alt"></i>Address</a>
+                        <a class="nav-link" id="dashboard-nav" href="{% url 'user:profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                        <a class="nav-link" id="orders-nav" href="{% url 'user:order' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
+                        <a class="nav-link" id="payment-nav" href="{% url 'user:payment' %}"><i class="fa fa-credit-card"></i>Payment Method</a>
+                        <a class="nav-link active" id="address-nav" href="{% url 'user:address' %}"><i class="fa fa-map-marker-alt"></i>Address</a>
                         <a class="nav-link" id="account-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-user"></i>Update Details</a>
                         <a class="nav-link" href="{% url 'user:change_password' %}"><i class="fa fa-lock"></i>Change Password</a>
                         <a class="nav-link" href="{% url 'user:logout' %}" ><i class="fa fa-sign-out-alt"></i>Logout</a>
                       </div>
                     </div>
                     <div class="col-md-9">
+                      <div class="tab-content">
 
-                        <div class="tab-pane" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+                        <div class="tab-pane active" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
                             <h4>Address</h4>
                             <hr>
                             <div class="row">
@@ -45,6 +46,7 @@
                             </div>
                         </div>
 
+                      </div>
                     </div>
                 </div>
             </div>
