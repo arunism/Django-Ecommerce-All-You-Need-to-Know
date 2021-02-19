@@ -9,13 +9,13 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
-                            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab"><i class="fa fa-shopping-bag"></i>Orders</a>
-                            <a class="nav-link" id="payment-nav" data-toggle="pill" href="#payment-tab" role="tab"><i class="fa fa-credit-card"></i>Payment Method</a>
-                            <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab" role="tab"><i class="fa fa-map-marker-alt"></i>address</a>
-                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab"><i class="fa fa-user"></i>Account Details</a>
-                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#password-tab" role="tab"><i class="fa fa-lock"></i>Change Password</a>
-                            <a class="nav-link" href="{% url 'user:logout' %}" ><i class="fa fa-sign-out-alt"></i>Logout</a>
+                          <a class="nav-link" id="dashboard-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                          <a class="nav-link" id="orders-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
+                          <a class="nav-link active" id="payment-nav" href="{% url 'user:payment' %}"><i class="fa fa-credit-card"></i>Payment Method</a>
+                          <a class="nav-link" id="address-nav" href="{% url 'user:address' %}"><i class="fa fa-map-marker-alt"></i>Address</a>
+                          <a class="nav-link" id="account-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-user"></i>Update Details</a>
+                          <a class="nav-link" href="{% url 'user:change_password' %}"><i class="fa fa-lock"></i>Change Password</a>
+                          <a class="nav-link" href="{% url 'user:logout' %}" ><i class="fa fa-sign-out-alt"></i>Logout</a>
                         </div>
                     </div>
                     <div class="col-md-9">
@@ -89,7 +89,7 @@
                                   {% if not address %}
                                   <div class="col-md-1"></div>
                                   <div class="alert-message col-md-10">
-                                    <p>No address specified. Go to 'Account Details' section and update your information.</p>
+                                    <p>No address specified. Go to <b><i>Account Details</i></b> section and update your information.</p>
                                   </div>
                                   <div class="col-md-1"></div>
                                   {% else %}
@@ -121,22 +121,6 @@
                                     <div class="col-md-12">
                                         <button class="btn">Update Account</button>
                                         <br><br>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane" id="password-tab" aria-labelledby="account-nav">
-                                <h4>Password change</h4>
-                                <hr>
-                                <form class="row col-md-6" method="post" novalidate>
-                                    {% csrf_token %}
-                                    {% for field in change_password_form %}
-                                    <div class="col-md-12">
-                                        {{field}}
-                                    </div>
-                                    {{field.errors|striptags}}
-                                    {% endfor %}
-                                    <div class="col-md-12">
-                                        <button class="btn">Save Changes</button>
                                     </div>
                                 </form>
                             </div>

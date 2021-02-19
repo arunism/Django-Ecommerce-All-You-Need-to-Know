@@ -34,7 +34,7 @@ def register(request):
                 )
                 user.save()
                 messages.success(request, f'Congratulations! {first_name}, Your account has been created! Now, please login and edit your informations.')
-                return redirect('user:profile')
+                return redirect('user:update_profile')
         else:
             messages.error(request, 'Oops! Password fields do not match.')
             return redirect('user:register')
@@ -69,68 +69,71 @@ def logout(request):
 
 
 @login_required
-def profile(request):
+def update_profile(request):
     if request.method == 'POST':
-        ### ---------- CHANGE PASSWORD ---------- ###
+        profile_form = ProfileForm(data=request.POST)
+        if profile_form.is_valid():
+            user = request.user
+            gender = profile_form.cleaned_data['gender']
+            phone = profile_form.cleaned_data['phone']
+            country = profile_form.cleaned_data['country']
+            state = profile_form.cleaned_data['state']
+            district = profile_form.cleaned_data['district']
+            city = profile_form.cleaned_data['city']
+            street = profile_form.cleaned_data['street']
+
+            profiles = Profile(user=user,phone=phone,gender=gender,country=country,state=state,district=district,city=city,street=street)
+            profiles.save()
+            messages.success(request, 'Congratulations! Your profile has been updated.')
+        else:
+            messages.error(request, "Oops! Your profile couldn't be updated. Please try again.")
+            return redirect('user:update_profile')
+
+    else:
+        profile_form = ProfileForm()
+
+    context = {'title':'Change Password',
+               'subtitle':'User',
+               'profile_form':profile_form,
+               'address':address,
+               }
+    return render(request, 'update-profile.html', context)
+
+
+@login_required
+def address(request):
+    address = Profile.objects.filter(user=request.user).order_by('-created_at')[:2]
+    context = {'title':'Address',
+               'subtitle':'User',
+               'address':address,
+               }
+    return render(request, 'address.html', context)
+
+@login_required
+def payment(request):
+    context = {'title':'Payment Method',
+               'subtitle':'User',
+               }
+    return render(request, 'payment.html', context)
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
         change_password_form = MyPasswordChangeForm(user=request.user, data=request.POST)
         if change_password_form.is_valid():
             change_password_form.save()
             # This will update the session and we won't be logged out after changing the password
             update_session_auth_hash(request, change_password_form.user)
             messages.success(request, 'Your password has been updated!')
-            return redirect('user:profile')
-        elif not change_password_form.is_valid():
-            messages.error(request, 'Oops! Something went wrong. Please try again.')
-            return redirect('user:profile')
-
-        ### ---------- PROFILE INFO UPDATE ---------- ###
+            return redirect('user:update_profile')
         else:
-            profile_form = ProfileForm(data=request.POST)
-            if profile_form.is_valid():
-                user = request.user
-                form.cleaned_data['gender']
-                form.cleaned_data['phone']
-                form.cleaned_data['country']
-                form.cleaned_data['state']
-                form.cleaned_data['district']
-                form.cleaned_data['city']
-                form.cleaned_data['street']
-
-                profiles = Profile(user=user,phone=phone,gender=gender,country=country,state=state,district=district,city=city,street=street)
-                profiles.save()
-                messages.success(request, 'Congratulations! Your profile has been updated.')
-            else:
-                messages.error(request, "Oops! Your profile couldn't be updated. Please try again.")
-                return redirect('user:profile')
-
+            messages.success(request, 'Oops! Something went wrong. Please try again.')
+            return redirect('user:update_profile')
     else:
         change_password_form = MyPasswordChangeForm(user=request.user)
-        profile_form = ProfileForm()
     context = {'title':'Change Password',
                'subtitle':'User',
                'change_password_form':change_password_form,
-               'profile_form':profile_form,
                }
-    return render(request, 'my-account.html', context)
-
-
-# @login_required
-# def change_password(request):
-#     if request.method == 'POST':
-#         change_password_form = MyPasswordChangeForm(user=request.user, data=request.POST)
-#         if change_password_form.is_valid():
-#             change_password_form.save()
-#             # This will update the session and we won't be logged out after changing the password
-#             update_session_auth_hash(request, change_password_form.user)
-#             messages.success(request, 'Your password has been updated!')
-#             return redirect('user:profile')
-#         else:
-#             messages.success(request, 'Oops! Something went wrong. Please try again.')
-#             return redirect('user:profile')
-#     else:
-#         change_password_form = MyPasswordChangeForm(user=request.user)
-#     context = {'title':'Change Password',
-#                'subtitle':'User',
-#                'change_password_form':change_password_form,
-#                }
-#     return render(request, 'change-password.html', context)
+    return render(request, 'change-password.html', context)

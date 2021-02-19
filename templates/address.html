@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- My Account Start -->
+        <div class="my-account">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                      <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link" id="dashboard-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                        <a class="nav-link" id="orders-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
+                        <a class="nav-link active" id="payment-nav" href="{% url 'user:payment' %}"><i class="fa fa-credit-card"></i>Payment Method</a>
+                        <a class="nav-link" id="address-nav" href="{% url 'user:address' %}"><i class="fa fa-map-marker-alt"></i>Address</a>
+                        <a class="nav-link" id="account-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-user"></i>Update Details</a>
+                        <a class="nav-link" href="{% url 'user:change_password' %}"><i class="fa fa-lock"></i>Change Password</a>
+                        <a class="nav-link" href="{% url 'user:logout' %}" ><i class="fa fa-sign-out-alt"></i>Logout</a>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+
+                        <div class="tab-pane" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+                            <h4>Address</h4>
+                            <hr>
+                            <div class="row">
+                              {% if not address %}
+                              <div class="col-md-1"></div>
+                              <div class="alert-message col-md-10">
+                                <p>No address specified. Go to <b><i>Account Details</i></b> section and update your information.</p>
+                              </div>
+                              <div class="col-md-1"></div>
+                              {% else %}
+                              {% for add in address %}
+                              <div class="col-md-6 profile-address">
+                                  <h5>Address {{forloop.counter}}</h5>
+                                  <br>
+                                  <p>{{add.street}}, {{add.city}}</p>
+                                  <p>{{add.district}}</p>
+                                  <p>Mobile: 977-{{add.phone}}</p>
+                                  <a href="{% url 'user:update_profile' %}" class="btn">Edit Address</a>
+                              </div>
+                              {% endfor %}
+                              {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- My Account End -->
+
+{% endblock %}

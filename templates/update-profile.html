@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- My Account Start -->
+        <div class="my-account">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                          <a class="nav-link" id="dashboard-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                          <a class="nav-link" id="orders-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
+                          <a class="nav-link active" id="payment-nav" href="{% url 'user:payment' %}"><i class="fa fa-credit-card"></i>Payment Method</a>
+                          <a class="nav-link" id="address-nav" href="{% url 'user:address' %}"><i class="fa fa-map-marker-alt"></i>Address</a>
+                          <a class="nav-link" id="account-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-user"></i>Update Details</a>
+                          <a class="nav-link" href="{% url 'user:change_password' %}"><i class="fa fa-lock"></i>Change Password</a>
+                          <a class="nav-link" href="{% url 'user:logout' %}" ><i class="fa fa-sign-out-alt"></i>Logout</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+
+                        <div class="tab-pane" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+                            <h4>Account Details</h4>
+                            <hr>
+                            <form class="row" method="post">
+                                {% csrf_token %}
+
+                                {% for field in profile_form %}
+                                <div class="col-md-6">
+                                    {{ field }}
+                                </div>
+                                {% endfor %}
+
+                                <div class="col-md-12">
+                                    <button class="btn">Update Account</button>
+                                    <br><br>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- My Account End -->
+
+{% endblock %}

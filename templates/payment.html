@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+        <!-- My Account Start -->
+        <div class="my-account">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                          <a class="nav-link" id="dashboard-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
+                          <a class="nav-link" id="orders-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
+                          <a class="nav-link active" id="payment-nav" href="{% url 'user:payment' %}"><i class="fa fa-credit-card"></i>Payment Method</a>
+                          <a class="nav-link" id="address-nav" href="{% url 'user:address' %}"><i class="fa fa-map-marker-alt"></i>Address</a>
+                          <a class="nav-link" id="account-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-user"></i>Update Details</a>
+                          <a class="nav-link" href="{% url 'user:change_password' %}"><i class="fa fa-lock"></i>Change Password</a>
+                          <a class="nav-link" href="{% url 'user:logout' %}" ><i class="fa fa-sign-out-alt"></i>Logout</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="tab-pane" id="payment-tab" aria-labelledby="payment-nav">
+                          <h4>Payment Method</h4>
+                          <hr>
+                          <p>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In condimentum quam ac mi viverra dictum.
+                              In efficitur ipsum diam, at dignissim lorem tempor in. Vivamus tempor hendrerit finibus.
+                              Nulla tristique viverra nisl, sit amet bibendum ante suscipit non.
+                              Praesent in faucibus tellus, sed gravida lacus. Vivamus eu diam eros. Aliquam et sapien eget arcu rhoncus scelerisque.
+                          </p>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- My Account End -->
+
+{% endblock %}

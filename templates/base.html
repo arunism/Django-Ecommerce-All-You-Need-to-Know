@@ -46,7 +46,7 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{request.user.first_name|capfirst}}</a>
                                 <div class="dropdown-menu">
-                                    <a href="{% url 'user:profile' %}" class="dropdown-item">Profile</a>
+                                    <a href="{% url 'user:update_profile' %}" class="dropdown-item">Profile</a>
                                     <a href="{% url 'user:logout' %}" class="dropdown-item">Logout</a>
                                 </div>
                             </div>
