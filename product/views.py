@@ -58,6 +58,8 @@ def cart(request):
             each_total = float(item.product.discounted_price) * item.quantity
             amount += each_total
         total_amount = amount + shipping_charge
+
+        request.session['cart_items_count'] = cart.count()
     context = {
                 'title':'Cart',
                 'subtitle':'Products',

@@ -91,7 +91,7 @@
                             </a>
                             <a href="{% url 'product:cart' %}" class="btn cart">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span>(0)</span>
+                                <span>({{ request.session.cart_items_count }})</span>
                             </a>
                         </div>
                     </div>
