@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from product.models import Product, Cart, Order
 from customer.models import Review
@@ -40,8 +40,32 @@ class ProductDetailView(View):
         context = {'title':'Details', 'subtitle':'Products', 'product':product}
         return render(request, 'product-detail.html', context)
 
+def add_to_cart(request, slug):
+    user = request.user
+    product = Product.objects.get(slug=slug)
+    cart = Cart(user=user, product=product)
+    cart.save()
+    return redirect('product:cart')
+
 def cart(request):
-    context = {'title':'Cart', 'subtitle':'Products'}
+    amount = 0.00
+    shipping_charge = 1.50
+
+    if request.user.is_authenticated:
+        user = request.user
+        cart = Cart.objects.filter(user=user)
+        for item in cart:
+            each_total = float(item.product.discounted_price) * item.quantity
+            amount += each_total
+        total_amount = amount + shipping_charge
+    context = {
+                'title':'Cart',
+                'subtitle':'Products',
+                'cart':cart,
+                'amount':round(amount, 2),
+                'shipping_charge':round(shipping_charge, 2),
+                'total_amount':round(total_amount, 2),
+            }
     return render(request, 'cart.html', context)
 
 def wishlist(request):

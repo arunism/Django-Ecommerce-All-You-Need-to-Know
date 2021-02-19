@@ -15,7 +15,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class CartAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
-    list_display = ['id', 'user', 'created_at']
+    list_display = ['product', 'user', 'quantity', 'created_at']
     list_filter = ['created_at', 'updated_at']
     readonly_fields = ['user', 'created_at', 'updated_at', 'product', 'quantity', 'size', 'color']
     class Meta:
