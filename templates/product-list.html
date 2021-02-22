@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="product-price">
                                         <h3><span>$</span>{{ product.discounted_price }}</h3>
-                                        <a class="btn" href="{% url 'product:cart' %}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                        <a class="btn" href="{% url 'product:add_to_cart' product.slug %}"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                 </div>
                             </div>

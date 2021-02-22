@@ -29,7 +29,7 @@ class ProductListView(View):
         gadgets_accessories = Product.objects.filter(category='gadgets_accessories')
         electronics = Product.objects.filter(category='electronics')
         # PAGINATION STARTS HERE
-        paginate = Paginator(product, 2)
+        paginate = Paginator(product, 12)
         page_num = request.GET.get('page', 1)
         try:
             page = paginate.page(page_num)

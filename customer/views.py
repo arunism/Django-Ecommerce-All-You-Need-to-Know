@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from customer.forms import MyPasswordChangeForm, MyPasswordResetForm, ProfileForm
 from customer.models import Profile
+from customer.utils import login_excluded
 
 # Create your views here.
 
@@ -43,6 +44,7 @@ def register(request):
         return render(request, 'register.html', context)
 
 
+@login_excluded('user:profile')
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
