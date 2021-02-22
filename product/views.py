@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from product.models import Product, Cart, Order
 from customer.models import Review
 
@@ -40,13 +42,38 @@ class ProductDetailView(View):
         context = {'title':'Details', 'subtitle':'Products', 'product':product}
         return render(request, 'product-detail.html', context)
 
+@login_required
 def add_to_cart(request, slug):
     user = request.user
     product = Product.objects.get(slug=slug)
     cart = Cart(user=user, product=product)
-    cart.save()
+    if Cart.objects.filter(user=user, product=product).exists():
+        cart.quantity += 1
+    else:
+        cart.save()
     return redirect('product:cart')
 
+@login_required
+def remove_from_cart(request, slug):
+    user = request.user
+    product = Product.objects.get(slug=slug)
+    cart = Cart.objects.filter(user=user, product=product)
+    cart.delete()
+    return redirect('product:cart')
+
+@login_required
+def update_quantity(request, slug, quantity):
+    user = request.user
+    product = Product.objects.get(slug=slug)
+    cart = Cart.objects.filter(user=user, product=product)
+    if int(quantity) == 0:
+        cart.delete()
+    else:
+        cart.quantity == quantity
+        cart.save()
+    return redirect('product:cart')
+
+@login_required
 def cart(request):
     amount = 0.00
     shipping_charge = 1.50
@@ -81,6 +108,19 @@ def orders(request):
 def checkout(request):
     context = {'title':'Checkout', 'subtitle':'Products'}
     return render(request, 'checkout.html', context)
+
+def search(request):
+    try:
+        query = request.GET.get('query')
+    except:
+        query = None
+    if query:
+        product = Product.objects.all()
+        product = product.filter(Q(title__icontains=query) | Q(category__icontains=query))
+    else:
+        product = Product.objects.all().order_by('-created_at')
+    context = {'title':'Search Results', 'subtitle':'Products', 'products':product}
+    return render(request, 'product-list.html', context)
 
 def contact(request):
     context = {'title':'Contact'}

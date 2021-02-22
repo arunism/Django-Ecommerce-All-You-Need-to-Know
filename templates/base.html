@@ -78,10 +78,10 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="search">
-                            <input type="text" placeholder="Search">
+                        <form class="search" method="get" action="{% url 'product:search' %}">
+                            <input type="text" name="query" placeholder="Search">
                             <button><i class="fa fa-search"></i></button>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-md-3">
                         <div class="user">

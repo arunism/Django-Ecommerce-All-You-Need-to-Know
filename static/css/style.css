@@ -1196,7 +1196,7 @@ h2 {
     width: 100px;
     font-size: 0;
 }
-.cart-page .table button {
+.cart-page .table button, .wishlist-page .table button {
     width: 30px;
     height: 30px;
     font-size: 14px;
@@ -1206,16 +1206,25 @@ h2 {
     border: none;
     border-radius: 4px;
 }
-.cart-page .table button.btn-minus {
+.cart-page .table .remove-btn {
+  padding: 7px 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+  background: #99738e;
+  border: none;
+  border-radius: 4px;
+}
+.cart-page .table button.btn-minus, .wishlist-page .table button.btn-minus {
     border-radius: 4px 0 0 4px;
 }
-.cart-page .table button.btn-plus {
+.cart-page .table button.btn-plus, .wishlist-page .table button.btn-plus {
     border-radius: 0 4px 4px 0;
 }
-.cart-page .table button.btn-cart {
+.cart-page .table button.btn-cart, .wishlist-page .table button.btn-cart {
     width: auto;
 }
-.cart-page .table input {
+.cart-page .table input, .wishlist-page .table input {
     width: 40px;
     height: 30px;
     font-size: 16px;
@@ -1308,6 +1317,21 @@ h2 {
     color: #fff;
     background: #99738e;
 }
+.continue-shopping {
+  border: solid #99738e 1px;
+  border-radius: 7px;
+  padding: 12px 35px;
+  color: #99738e;
+  text-align: center;
+}
+.my-account .tab-content h6 {
+  text-align: center;
+  padding-top: 20px;
+}
+.continue-shopping:hover {
+  background-color: #99738e;
+  color: #fff;
+}
 
 /********** Wishlist CSS **********/
 .wishlist-page {
@@ -1356,34 +1380,6 @@ h2 {
     display: inline-block;
     width: 100px;
     font-size: 0;
-}
-.wishlist-page .table button {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
-    text-align: center;
-    color: #fff;
-    background: #99738e;
-    border: none;
-    border-radius: 4px;
-}
-.wishlist-page .table button.btn-minus {
-    border-radius: 4px 0 0 4px;
-}
-.wishlist-page .table button.btn-plus {
-    border-radius: 0 4px 4px 0;
-}
-.wishlist-page .table button.btn-cart {
-    width: auto;
-}
-.wishlist-page .table input {
-    width: 40px;
-    height: 30px;
-    font-size: 16px;
-    color: #fff;
-    text-align: center;
-    background: #2c062e;
-    border: none;
 }
 
 /********** Checkout CSS **********/
