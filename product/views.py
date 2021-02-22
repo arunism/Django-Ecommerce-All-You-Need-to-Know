@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage
 from product.models import Product, Cart, Order
 from customer.models import Review
 
@@ -27,8 +28,16 @@ class ProductListView(View):
         men_and_women_clothes = Product.objects.filter(category='men_and_women_clothes')
         gadgets_accessories = Product.objects.filter(category='gadgets_accessories')
         electronics = Product.objects.filter(category='electronics')
+        # PAGINATION STARTS HERE
+        paginate = Paginator(product, 2)
+        page_num = request.GET.get('page', 1)
+        try:
+            page = paginate.page(page_num)
+        except EmptyPage:
+            page = paginate.page(1)
+        # PAGINATION ENDS HERE
         context = {'title':'Products',
-                    'products': product,
+                    'products': page,
                     'kids_clothes':kids_clothes,
                     'men_and_women_clothes': men_and_women_clothes,
                     'gadgets_accessories': gadgets_accessories,
@@ -119,7 +128,15 @@ def search(request):
         product = product.filter(Q(title__icontains=query) | Q(category__icontains=query))
     else:
         product = Product.objects.all().order_by('-created_at')
-    context = {'title':'Search Results', 'subtitle':'Products', 'products':product}
+    # PAGINATION STARTS HERE
+    paginate = Paginator(product, 12)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginate.page(page_num)
+    except EmptyPage:
+        page = paginate.page(1)
+    # PAGINATION ENDS HERE
+    context = {'title':'Search Results', 'subtitle':'Products', 'products':page}
     return render(request, 'product-list.html', context)
 
 def contact(request):
