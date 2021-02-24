@@ -14,19 +14,19 @@
                                 <div class="product-view-top">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <div class="product-search">
-                                                <input type="email" value="Search">
+                                            <form class="product-search" method="get" action="{% url 'product:search' %}">
+                                                <input name="query" type="text" placeholder="Search">
                                                 <button><i class="fa fa-search"></i></button>
-                                            </div>
+                                            </form>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="product-short">
                                                 <div class="dropdown">
-                                                    <div class="dropdown-toggle" data-toggle="dropdown">Product short by</div>
+                                                    <div class="dropdown-toggle" data-toggle="dropdown">{{ title }}</div>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="#" class="dropdown-item">Newest</a>
-                                                        <a href="#" class="dropdown-item">Popular</a>
-                                                        <a href="#" class="dropdown-item">Most sale</a>
+                                                        <a href="{% url 'product:product_list' %}" class="dropdown-item">Latest Releases</a>
+                                                        <a href="{% url 'product:popular_products' %}" class="dropdown-item">Most Popular</a>
+                                                        <a href="{% url 'product:most_sold_products' %}" class="dropdown-item">Most sale</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -36,16 +36,9 @@
                                                 <div class="dropdown">
                                                     <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="#" class="dropdown-item">$0 to $50</a>
-                                                        <a href="#" class="dropdown-item">$51 to $100</a>
-                                                        <a href="#" class="dropdown-item">$101 to $150</a>
-                                                        <a href="#" class="dropdown-item">$151 to $200</a>
-                                                        <a href="#" class="dropdown-item">$201 to $250</a>
-                                                        <a href="#" class="dropdown-item">$251 to $300</a>
-                                                        <a href="#" class="dropdown-item">$301 to $350</a>
-                                                        <a href="#" class="dropdown-item">$351 to $400</a>
-                                                        <a href="#" class="dropdown-item">$401 to $450</a>
-                                                        <a href="#" class="dropdown-item">$451 to $500</a>
+                                                        <a href="" class="dropdown-item">Low Price</a>
+                                                        <a href="#" class="dropdown-item">Medium Price</a>
+                                                        <a href="#" class="dropdown-item">High Price</a>
                                                     </div>
                                                 </div>
                                             </div>

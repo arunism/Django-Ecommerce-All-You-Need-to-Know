@@ -20,6 +20,15 @@ def home(request):
                 }
     return render(request, 'index.html', context)
 
+def pagination_func(request, product):
+    paginate = Paginator(product, 12)
+    page_num = request.GET.get('page', 1)
+    try:
+        page = paginate.page(page_num)
+    except EmptyPage:
+        page = paginate.page(1)
+    return page
+
 class ProductListView(View):
     def get(self, request):
         product = Product.objects.all().order_by('-created_at')
@@ -29,19 +38,39 @@ class ProductListView(View):
         gadgets_accessories = Product.objects.filter(category='gadgets_accessories')
         electronics = Product.objects.filter(category='electronics')
         # PAGINATION STARTS HERE
-        paginate = Paginator(product, 12)
-        page_num = request.GET.get('page', 1)
-        try:
-            page = paginate.page(page_num)
-        except EmptyPage:
-            page = paginate.page(1)
+        page = pagination_func(request, product)
         # PAGINATION ENDS HERE
-        context = {'title':'Products',
+        context = {'title':'Latest Releases',
+                    'subtitle':'Products',
                     'products': page,
                     'kids_clothes':kids_clothes,
                     'men_and_women_clothes': men_and_women_clothes,
                     'gadgets_accessories': gadgets_accessories,
                     'electronics': electronics,
+                }
+        return render(request, 'product-list.html', context)
+
+class LatestProducts(View):
+    def get(self, request):
+        product = Product.objects.all().order_by('-rating', '-created_at')
+        # PAGINATION STARTS HERE
+        page = pagination_func(request, product)
+        # PAGINATION ENDS HERE
+        context = {'title':'Most Popular',
+                    'subtitle':'Products',
+                    'products': page,
+                }
+        return render(request, 'product-list.html', context)
+
+class MostSoldProducts(View):
+    def get(self, request):
+        product = Product.objects.all().order_by('-ratings_quantity', '-created_at')
+        # PAGINATION STARTS HERE
+        page = pagination_func(request, product)
+        # PAGINATION ENDS HERE
+        context = {'title':'Most Sale',
+                    'subtitle':'Products',
+                    'products': page,
                 }
         return render(request, 'product-list.html', context)
 
@@ -129,12 +158,7 @@ def search(request):
     else:
         product = Product.objects.all().order_by('-created_at')
     # PAGINATION STARTS HERE
-    paginate = Paginator(product, 12)
-    page_num = request.GET.get('page', 1)
-    try:
-        page = paginate.page(page_num)
-    except EmptyPage:
-        page = paginate.page(1)
+    page = pagination_func(request, product)
     # PAGINATION ENDS HERE
     context = {'title':'Search Results', 'subtitle':'Products', 'products':page}
     return render(request, 'product-list.html', context)
