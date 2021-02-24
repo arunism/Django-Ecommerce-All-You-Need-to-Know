@@ -9,8 +9,10 @@ from customer.models import Review
 # Create your views here.
 
 def home(request):
-    new_releases = Product.objects.all().order_by('-created_at')[:10]
-    featured_products = Product.objects.filter(rating=4.5).order_by('-created_at')[:10]
+    product = Product.objects.all().order_by('-created_at')
+    new_releases = product[:10]
+    featured_products = [items for items in product if items.rating > 4.5]
+    featured_products = featured_products[:10]
     reviews = Review.objects.filter(service='Excellent')[:10]
     context = {'title': 'Home',
                 'subtitle':'Products',
@@ -76,13 +78,8 @@ class MostSoldProducts(View):
 
 class LowPriceProducts(View):
     def get(self, request):
-        page = []
         product = Product.objects.all().order_by('-created_at')
-        for items in product:
-            if int(items.discounted_price) <= 10:
-                page.append(items)
-            else:
-                continue
+        page = [items for items in product if int(items.discounted_price) <= 10]
         # PAGINATION STARTS HERE
         page = pagination_func(request, page)
         # PAGINATION ENDS HERE
@@ -94,13 +91,8 @@ class LowPriceProducts(View):
 
 class MediumPriceProducts(View):
     def get(self, request):
-        page = []
         product = Product.objects.all().order_by('-created_at')
-        for items in product:
-            if int(items.discounted_price) > 10 and int(items.discounted_price) <= 30:
-                page.append(items)
-            else:
-                continue
+        page = [items for items in product if int(items.discounted_price) > 10 and int(items.discounted_price) <= 30]
         # PAGINATION STARTS HERE
         page = pagination_func(request, page)
         # PAGINATION ENDS HERE
@@ -112,13 +104,8 @@ class MediumPriceProducts(View):
 
 class HighPriceProducts(View):
     def get(self, request):
-        page = []
         product = Product.objects.all().order_by('-created_at')
-        for items in product:
-            if int(items.discounted_price) > 30:
-                page.append(items)
-            else:
-                continue
+        page = [items for items in product if int(items.discounted_price) > 30]
         # PAGINATION STARTS HERE
         page = pagination_func(request, page)
         # PAGINATION ENDS HERE
