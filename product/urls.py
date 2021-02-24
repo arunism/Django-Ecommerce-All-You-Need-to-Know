@@ -17,8 +17,8 @@ urlpatterns = [
     path('decrease/quantity/<str:slug>/', views.decrease_quantity, name='decrease_quantity'),
     path('cart/', views.cart, name='cart'),
     path('wishlist/', views.wishlist, name='wishlist'),
-    path('orders/', views.orders, name='orders'),
     path('checkout/', views.checkout, name='checkout'),
+    path('orders/', views.orders, name='orders'),
     path('search/', views.search, name='search'),
     path('contact/', views.contact, name='contact'),
 ]

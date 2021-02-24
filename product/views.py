@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage
 from product.models import Product, Cart, Order
-from customer.models import Review
+from customer.models import Profile, Review
 
 # Create your views here.
 
@@ -189,13 +189,33 @@ def wishlist(request):
     context = {'title':'Wishlist', 'subtitle':'Products'}
     return render(request, 'wishlist.html', context)
 
+def checkout(request):
+    user = request.user
+    profile = Profile.objects.filter(user=user).order_by('-created_at')
+    profile = profile[0]
+    cart = Cart.objects.filter(user=user)
+
+    amount = 0.00
+    shipping_charge = 1.50
+    for item in cart:
+        each_total = float(item.product.discounted_price) * item.quantity
+        amount += each_total
+    total_amount = amount + shipping_charge
+
+    context = {
+                'title':'Checkout',
+                'subtitle':'Products',
+                'profile':profile,
+                'cart': cart,
+                'amount': round(amount, 2),
+                'shipping_charge': round(shipping_charge, 2),
+                'total_amount': round(total_amount, 2)
+            }
+    return render(request, 'checkout.html', context)
+
 def orders(request):
     context = {'title':'Orders', 'subtitle':'Products'}
     return render(request, 'my-account.html', context)
-
-def checkout(request):
-    context = {'title':'Checkout', 'subtitle':'Products'}
-    return render(request, 'checkout.html', context)
 
 def search(request):
     try:

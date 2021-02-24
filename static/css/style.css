@@ -30,6 +30,10 @@ h2 {
   border-radius: 5px;
   background-color: #99738e;
 }
+.line-separator {
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
 
 @media(min-width: 992px) {
     .container-fluid {
@@ -1275,28 +1279,28 @@ h2 {
     border-top: 1px solid #dddddd;
     margin: 0;
 }
-.cart-page .cart-summary .cart-btn button {
+.cart-page .cart-summary .cart-btn a button {
     margin-top: 15px;
-    width: calc(50% - 15px);
+    width: calc(45% - 15px);
     height: 50px;
     padding: 2px 10px;
-    text-align: center;
     color: #fff;
+    text-align: center;
     background: #99738e;
     border: none;
     border-radius: 4px;
 }
-.cart-page .cart-summary .cart-btn button:hover {
-    color: #99738e;
+.cart-page .cart-summary .cart-btn a:hover button {
+    color: #fff;
     background: #2c062e;
 }
-.cart-page .cart-summary .cart-btn button:first-child {
+.cart-page .cart-summary .cart-btn a:first-child button {
     margin-right: 25px;
     color: #99738e;
     background: #fff;
     border: 1px solid #99738e;
 }
-.cart-page .cart-summary .cart-btn button:first-child:hover {
+.cart-page .cart-summary .cart-btn a:first-child:hover button {
     color: #fff;
     background: #99738e;
 }
@@ -1493,13 +1497,13 @@ h2 {
 .my-account .tab-content .table td {
     vertical-align: middle;
 }
-.my-account .profile-address {
+.my-account .profile-address, .checkout-address {
   background-color: #f3f6ff;
   padding: 20px;
   border: 12px solid #fff;
   border-radius: 20px;
 }
-.my-account .profile-address h5 {
+.my-account .profile-address h5, .checkout-address h5 {
   font-weight: bold;
   margin-bottom: 10px;
 }
