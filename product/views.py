@@ -56,7 +56,7 @@ class LatestProducts(View):
         # PAGINATION STARTS HERE
         page = pagination_func(request, product)
         # PAGINATION ENDS HERE
-        context = {'title':'Most Popular',
+        context = {'sort_title':'Most Popular',
                     'subtitle':'Products',
                     'products': page,
                 }
@@ -68,7 +68,61 @@ class MostSoldProducts(View):
         # PAGINATION STARTS HERE
         page = pagination_func(request, product)
         # PAGINATION ENDS HERE
-        context = {'title':'Most Sale',
+        context = {'sort_title':'Most Sale',
+                    'subtitle':'Products',
+                    'products': page,
+                }
+        return render(request, 'product-list.html', context)
+
+class LowPriceProducts(View):
+    def get(self, request):
+        page = []
+        product = Product.objects.all().order_by('-created_at')
+        for items in product:
+            if int(items.discounted_price) <= 10:
+                page.append(items)
+            else:
+                continue
+        # PAGINATION STARTS HERE
+        page = pagination_func(request, page)
+        # PAGINATION ENDS HERE
+        context = {'price_title':'Low Price (< $10)',
+                    'subtitle':'Products',
+                    'products': page,
+                }
+        return render(request, 'product-list.html', context)
+
+class MediumPriceProducts(View):
+    def get(self, request):
+        page = []
+        product = Product.objects.all().order_by('-created_at')
+        for items in product:
+            if int(items.discounted_price) > 10 and int(items.discounted_price) <= 30:
+                page.append(items)
+            else:
+                continue
+        # PAGINATION STARTS HERE
+        page = pagination_func(request, page)
+        # PAGINATION ENDS HERE
+        context = {'price_title':'Medium Price ($10 - $30)',
+                    'subtitle':'Products',
+                    'products': page,
+                }
+        return render(request, 'product-list.html', context)
+
+class HighPriceProducts(View):
+    def get(self, request):
+        page = []
+        product = Product.objects.all().order_by('-created_at')
+        for items in product:
+            if int(items.discounted_price) > 30:
+                page.append(items)
+            else:
+                continue
+        # PAGINATION STARTS HERE
+        page = pagination_func(request, page)
+        # PAGINATION ENDS HERE
+        context = {'price_title':'High Price (> $30)',
                     'subtitle':'Products',
                     'products': page,
                 }
@@ -77,7 +131,7 @@ class MostSoldProducts(View):
 class ProductDetailView(View):
     def get(self, request, slug):
         product = Product.objects.get(slug=slug)
-        context = {'title':'Details', 'subtitle':'Products', 'product':product}
+        context = {'sort_title':'Details', 'subtitle':'Products', 'product':product}
         return render(request, 'product-detail.html', context)
 
 @login_required

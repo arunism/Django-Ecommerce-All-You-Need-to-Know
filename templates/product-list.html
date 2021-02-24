@@ -22,7 +22,11 @@
                                         <div class="col-md-4">
                                             <div class="product-short">
                                                 <div class="dropdown">
-                                                    <div class="dropdown-toggle" data-toggle="dropdown">{{ title }}</div>
+                                                    {% if sort_title %}
+                                                    <div class="dropdown-toggle" data-toggle="dropdown">{{ sort_title }}</div>
+                                                    {% else %}
+                                                    <div class="dropdown-toggle" data-toggle="dropdown">Sort Products by</div>
+                                                    {% endif %}
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a href="{% url 'product:product_list' %}" class="dropdown-item">Latest Releases</a>
                                                         <a href="{% url 'product:popular_products' %}" class="dropdown-item">Most Popular</a>
@@ -34,11 +38,15 @@
                                         <div class="col-md-4">
                                             <div class="product-price-range">
                                                 <div class="dropdown">
-                                                    <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
+                                                    {% if price_title %}
+                                                    <div class="dropdown-toggle" data-toggle="dropdown">{{ price_title }}</div>
+                                                    {% else %}
+                                                    <div class="dropdown-toggle" data-toggle="dropdown">Products Price Range</div>
+                                                    {% endif %}
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="" class="dropdown-item">Low Price</a>
-                                                        <a href="#" class="dropdown-item">Medium Price</a>
-                                                        <a href="#" class="dropdown-item">High Price</a>
+                                                        <a href="{% url 'product:low_price_products' %}" class="dropdown-item">Low Price (< $10)</a>
+                                                        <a href="{% url 'product:medium_price_products' %}" class="dropdown-item">Medium Price ($10 - $30)</a>
+                                                        <a href="{% url 'product:high_price_products' %}" class="dropdown-item">High Price (> $30)</a>
                                                     </div>
                                                 </div>
                                             </div>
