@@ -1,6 +1,6 @@
 (function ($) {
     "use strict";
-    
+
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
@@ -17,8 +17,7 @@
         toggleNavbarMethod();
         $(window).resize(toggleNavbarMethod);
     });
-    
-    
+
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -31,8 +30,7 @@
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
         return false;
     });
-    
-    
+
     // Header slider
     $('.header-slider').slick({
         autoplay: true,
@@ -41,8 +39,7 @@
         slidesToShow: 1,
         slidesToScroll: 1
     });
-    
-    
+
     // Product Slider 4 Column
     $('.product-slider-4').slick({
         autoplay: true,
@@ -77,8 +74,7 @@
             },
         ]
     });
-    
-    
+
     // Product Slider 3 Column
     $('.product-slider-3').slick({
         autoplay: true,
@@ -107,8 +103,7 @@
             },
         ]
     });
-    
-    
+
     // Product Detail Slider
     $('.product-slider-single').slick({
         infinite: true,
@@ -127,8 +122,7 @@
         focusOnSelect: true,
         asNavFor: '.product-slider-single'
     });
-    
-    
+
     // Brand Slider
     $('.brand-slider').slick({
         speed: 5000,
@@ -170,8 +164,7 @@
             }
         ]
     });
-    
-    
+
     // Review slider
     $('.review-slider').slick({
         autoplay: true,
@@ -188,8 +181,7 @@
             }
         ]
     });
-    
-    
+
     // Widget slider
     $('.sidebar-slider').slick({
         autoplay: true,
@@ -198,8 +190,7 @@
         slidesToShow: 1,
         slidesToScroll: 1
     });
-    
-    
+
     // Quantity
     $('.qty button').on('click', function () {
         var $button = $(this);
@@ -215,8 +206,7 @@
         }
         $button.parent().find('input').val(newVal);
     });
-    
-    
+
     // Shipping address show hide
     $('.checkout #shipto').change(function () {
         if($(this).is(':checked')) {
@@ -225,8 +215,7 @@
             $('.checkout .shipping-address').slideUp();
         }
     });
-    
-    
+
     // Payment methods show hide
     $('.checkout .payment-method .custom-control-input').change(function () {
         if ($(this).prop('checked')) {
@@ -236,4 +225,3 @@
         }
     });
 })(jQuery);
-

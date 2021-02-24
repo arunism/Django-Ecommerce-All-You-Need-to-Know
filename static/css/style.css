@@ -970,26 +970,9 @@ h2 {
     font-weight: 900;
     padding-right: 5px;
 }
-.product-detail .tab-content .reviews-submitted {
-    position: relative;
-    margin-bottom: 45px;
-}
-.product-detail .tab-content .reviewer {
-    color: #99738e;
-    font-size: 18px;
-    font-weight: 600;
-}
-.product-detail .tab-content .reviewer span {
-    color: #666666;
-    font-size: 14px;
-    font-weight: 400;
-}
 .product-detail .tab-content .ratting {
     color: #99738e;
     margin-bottom: 15px;
-}
-.product-detail .tab-content .reviews-submit .ratting {
-    font-size: 24px;
 }
 .product-detail .tab-content .form input {
     width: 100%;

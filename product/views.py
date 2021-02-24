@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage
 from product.models import Product, Cart, Order
 from customer.models import Review
@@ -141,15 +142,23 @@ def remove_from_cart(request, slug):
     return redirect('product:cart')
 
 @login_required
-def update_quantity(request, slug, quantity):
+def increase_quantity(request, slug):
     user = request.user
     product = Product.objects.get(slug=slug)
-    cart = Cart.objects.filter(user=user, product=product)
-    if int(quantity) == 0:
+    cart = Cart.objects.get(user=user, product=product)
+    cart.quantity += 1
+    cart.save()
+    return redirect('product:cart')
+
+@login_required
+def decrease_quantity(request, slug):
+    user = request.user
+    product = Product.objects.get(slug=slug)
+    cart = Cart.objects.get(user=user, product=product)
+    cart.quantity -= 1
+    cart.save()
+    if cart.quantity == 0:
         cart.delete()
-    else:
-        cart.quantity == quantity
-        cart.save()
     return redirect('product:cart')
 
 @login_required

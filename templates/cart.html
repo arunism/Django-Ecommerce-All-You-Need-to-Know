@@ -8,10 +8,10 @@
         <div class="cart-page">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8">
-                        <div class="cart-page-inner">
 
-                            {% if request.session.cart_items_count == 0 %}
+                    {% if request.session.cart_items_count == 0 %}
+                    <div class="col-lg-12">
+                        <div class="cart-page-inner">
                             <div class="my-account">
                               <div class="tab-content">
                                 <div class="tab-pane show active" role="tabpanel" aria-labelledby="dashboard-nav">
@@ -21,8 +21,12 @@
                                 </div>
                               </div>
                             </div>
+                        </div>
+                    </div>
 
-                            {% else %}
+                    {% else %}
+                    <div class="col-lg-8">
+                        <div class="cart-page-inner">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
@@ -40,16 +44,20 @@
                                         <tr>
                                           <td>
                                               <div class="img">
-                                                  <a href="#"><img src="{{ item.product.image1.url }}"></a>
-                                                  <p>{{ item.product.title }}</p>
+                                                  <a href="{% url 'product:product_details' item.product.slug %}"><img src="{{ item.product.image1.url }}"></a>
+                                                  <a href="{% url 'product:product_details' item.product.slug %}"><p>{{ item.product.title }}</p></a>
                                               </div>
                                           </td>
                                           <td>${{ item.product.discounted_price }}</td>
                                           <td>
                                               <div class="qty">
-                                                  <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                  <a href="{% url 'product:decrease_quantity' item.product.slug %}">
+                                                    <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                  </a>
                                                   <input type="text" value="{{ item.quantity }}">
-                                                  <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                                  <a href="{% url 'product:increase_quantity' item.product.slug %}">
+                                                    <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                                  </a>
                                               </div>
                                           </td>
                                           <td>${{ item.product.discounted_price | multiply:item.quantity }}</td>
@@ -60,7 +68,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {% endif %}
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -89,6 +96,8 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
+
                 </div>
             </div>
         </div>

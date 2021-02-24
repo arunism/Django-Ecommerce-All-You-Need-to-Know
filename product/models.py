@@ -36,7 +36,7 @@ class Product(models.Model):
         return self.title
 
     def specification_list(self):
-        return self.specification.split('**')
+        return self.specification.split('\n')
 
     # Creating a unique slug for each product
     def _create_unique_slug(self):

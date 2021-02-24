@@ -91,7 +91,9 @@
                             </a>
                             <a href="{% url 'product:cart' %}" class="btn cart">
                                 <i class="fa fa-shopping-cart"></i>
+                                {% if request.session.cart_items_count != 0 %}
                                 <span>({{ request.session.cart_items_count }})</span>
+                                {% endif %}
                             </a>
                         </div>
                     </div>
