@@ -1,5 +1,5 @@
 from django.contrib import admin
-from product.models import Product, Cart, Order
+from product.models import Product, Cart, Order, Contact
 
 # Register your models here.
 
@@ -30,6 +30,15 @@ class OrderAdmin(admin.ModelAdmin):
     class Meta:
         model = Order
 
+class ContactAdmin(admin.ModelAdmin):
+    date_hierarchy = 'sent_at'
+    list_display = ['email', 'subject', 'sent_at']
+    list_filter = ['sent_at', 'email']
+    readonly_fields = ['first_name', 'last_name', 'email', 'phone', 'subject', 'message']
+    class Meta:
+        model = Contact
+
+admin.site.register(Contact, ContactAdmin)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)

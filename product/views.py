@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage
-from product.models import Product, Cart, Order
+from product.models import Product, Cart, Order, Contact
 from customer.models import Profile, Review
 
 # Create your views here.
@@ -248,5 +249,19 @@ def search(request):
     return render(request, 'product-list.html', context)
 
 def contact(request):
-    context = {'title':'Contact'}
-    return render(request, 'contact.html', context)
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        subject = request.POST['subject']
+        message = request.POST['message']
+
+        contact = Contact(first_name=first_name, last_name=last_name, email=email, phone=phone, subject=subject, message=message)
+        contact.save()
+        messages.success(request, 'Thanks for your response! We will get back to you soon.')
+
+        return redirect('product:contact')
+    else:
+        context = {'title':'Contact'}
+        return render(request, 'contact.html', context)

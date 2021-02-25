@@ -87,3 +87,15 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Contact(models.Model):
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=25)
+    email = models.EmailField(max_length=50)
+    phone = models.CharField(max_length=15)
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    sent_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    def __str__(self):
+        return self.subject
