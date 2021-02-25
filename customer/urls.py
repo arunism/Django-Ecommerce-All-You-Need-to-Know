@@ -25,7 +25,6 @@ urlpatterns = [
           name='password_reset_complete'
           ),
     path('me/', views.profile, name='profile'),
-    path('orders/', views.order, name='order'),
     path('update/profile/', views.update_profile, name='update_profile'),
     path('address/', views.address, name='address'),
     path('payment/', views.payment, name='payment'),

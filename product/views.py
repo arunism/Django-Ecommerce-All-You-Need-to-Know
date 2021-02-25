@@ -213,9 +213,23 @@ def checkout(request):
             }
     return render(request, 'checkout.html', context)
 
+def order_placed(request):
+    user = request.user
+    profile = Profile.objects.filter(user=user).order_by('-created_at')
+    profile = profile[0]
+    cart = Cart.objects.filter(user=user)
+
+    for item in cart:
+        order = Order(user=user, profile=profile, product=item.product, quantity=item.quantity)
+        order.save()
+        item.delete()
+    return redirect('product:orders')
+
 def orders(request):
-    context = {'title':'Orders', 'subtitle':'Products'}
-    return render(request, 'my-account.html', context)
+    user = request.user
+    orders = Order.objects.filter(user=user)
+    context = {'title':'Orders', 'subtitle':'Products', 'orders':orders}
+    return render(request, 'order.html', context)
 
 def search(request):
     try:

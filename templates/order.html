@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load my_tags %}
 
 {% block content %}
 
@@ -10,7 +11,7 @@
                     <div class="col-md-3">
                         <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                           <a class="nav-link" id="dashboard-nav" href="{% url 'user:profile' %}"><i class="fa fa-tachometer-alt"></i>Dashboard</a>
-                          <a class="nav-link active" id="orders-nav" href="{% url 'user:order' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
+                          <a class="nav-link active" id="orders-nav" href="{% url 'product:orders' %}"><i class="fa fa-shopping-bag"></i>Orders</a>
                           <a class="nav-link" id="payment-nav" href="{% url 'user:payment' %}"><i class="fa fa-credit-card"></i>Payment Method</a>
                           <a class="nav-link" id="address-nav" href="{% url 'user:address' %}"><i class="fa fa-map-marker-alt"></i>Address</a>
                           <a class="nav-link" id="account-nav" href="{% url 'user:update_profile' %}"><i class="fa fa-user"></i>Update Details</a>
@@ -28,37 +29,23 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Product</th>
-                                                <th>Date</th>
                                                 <th>Price</th>
+                                                <th>Date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                          {% for order in orders %}
                                             <tr>
-                                                <td>1</td>
-                                                <td>Product Name</td>
-                                                <td>01 Jan 2020</td>
-                                                <td>$99</td>
-                                                <td>Approved</td>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ order.product.title }}</td>
+                                                <td>${{ order.product.discounted_price | multiply:order.quantity }}</td>
+                                                <td>{{ order.created_at | date:"M d, Y" }}</td>
+                                                <td><b>{{ order.status }}</b></td>
                                                 <td><button class="btn">View</button></td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Product Name</td>
-                                                <td>01 Jan 2020</td>
-                                                <td>$99</td>
-                                                <td>Approved</td>
-                                                <td><button class="btn">View</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Product Name</td>
-                                                <td>01 Jan 2020</td>
-                                                <td>$99</td>
-                                                <td>Approved</td>
-                                                <td><button class="btn">View</button></td>
-                                            </tr>
+                                          {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>

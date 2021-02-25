@@ -79,14 +79,6 @@ def profile(request):
 
 
 @login_required
-def order(request):
-    context = {'title':'Profile',
-               'subtitle':'Orders',
-               }
-    return render(request, 'order.html', context)
-
-
-@login_required
 def update_profile(request):
     if request.method == 'POST':
         profile_form = ProfileForm(data=request.POST)
