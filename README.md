@@ -6,9 +6,9 @@ To run the program first download the zip file of this repository and unzip it o
 
 Now install all the required dependencies and libraries by using the command:
 
-    * pip install requirements.txt
+    * pip install -r requirements.txt
     * OR
-    * pip3 install requirements.txt
+    * pip3 install -r requirements.txt
 
 Now run the migrations and fit the migrations to the database using the commands:
 
